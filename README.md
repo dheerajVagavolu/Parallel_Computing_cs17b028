@@ -87,9 +87,9 @@ where n is the number of nodes.
 
 To run the shortest path algorithm use:
 ```sh
-mpiexec -np <p> ./shortest_path <s> <d>
+mpiexec -np <p> ./shortest_path <s> <d> <g>
 ```
-where p is the number of processes, s is the source, d is the destination.
+where p is the number of processes, s is the source, d is the destination and g is the graph size (number of nodes).
 
 ## Issues
 

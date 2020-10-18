@@ -22,15 +22,30 @@ int main(int argc, char **argv)
 
     MPI_Status status;
 
-    int graph_size = argv[3];
+    int graph_size;
+    int s;
+    int d;
 
-    if (argv[1] == NULL)
+    if (argv[1] == NULL || argv[2] == NULL)
     {
-        graph_size = 4;
+        printf("\n* Provide Source and Destination in the command line argument ! . See ReadMe for format. \n\n");
+        MPI_Abort(MPI_COMM_WORLD, 14);
     }
     else
     {
-        graph_size = argv[3];
+        s = atoi(argv[1]);
+        d = atoi(argv[2]);
+    }
+
+    if (argv[3] == NULL)
+    {
+
+        printf("\n* Provide Graph Size in the command line argument ! . See ReadMe for format. \n\n");
+        MPI_Abort(MPI_COMM_WORLD, 14);
+    }
+    else
+    {
+        graph_size = atoi(argv[3]);
     }
 
     int root_n = sqrt(n);
@@ -38,20 +53,6 @@ int main(int argc, char **argv)
     int box_size = graph_size / root_n;
 
     int edge = (graph_size / box_size);
-
-    int s;
-    int d;
-
-    if (argv[1] == NULL)
-    {
-        s = 2;
-        d = 3;
-    }
-    else
-    {
-        s = atoi(argv[1]);
-        d = atoi(argv[2]);
-    }
 
     int temp1_s = s / box_size;
     int temp_d = d / box_size;
@@ -86,7 +87,16 @@ int main(int argc, char **argv)
     }
 
     FILE *fp;
-    fp = fopen("matrix.txt", "r");
+
+    if (fp == NULL)
+    {
+        printf("\n* Adjacency Matrix file could not be opened. \n\n");
+        MPI_Abort(MPI_COMM_WORLD, 14);
+    }
+    else
+    {
+        fp = fopen("matrix.txt", "r");
+    }
 
     char *p = malloc(sizeof(char) * (graph_size));
 
