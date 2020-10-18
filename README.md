@@ -43,6 +43,8 @@ and is shown in the command line.
 
 ![alt text](https://github.com/dheerajrox/Parallel_Computing_cs17b028/blob/main/images/process_node.png?raw=true)
 
+In this figure, we can see that an adjacency matrix of size 8x8 is divided into sub matrices of 4x4 to accomodate 4 processes.
+
 
 * Create a secondary sub matrix of the size of the mini matrices to store part of the result in each process.
 * take a note of the process containing the required element. ie. AdjacencyMatrix[S,D]
