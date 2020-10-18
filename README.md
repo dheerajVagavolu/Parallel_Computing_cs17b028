@@ -2,6 +2,7 @@
 ## Table of Contents
 
 
+* [About](#about-the-project)
 * [Algorithm](#about-the-project)
 * [Built With](#built-with)
 * [Usage](#usage)
@@ -12,10 +13,10 @@
 * Task: Implement shortest path algorithm using matrix multiplication. Assume an undirected
 graph with edge weights 1.
 
-* Constraint: The adjacency matrix cannot be allocated on a single process, but will occupy all the
+* Constraint1: The adjacency matrix cannot be allocated on a single process, but will occupy all the
 processes on which the program is launched on
 
-* The number of processes is a perfect square.
+* Constraint2: The number of processes is a perfect square.
 
 * Result: Implemented a C program to solve the given problem, (including the constraint). The output is in the format 
 ```c
