@@ -41,7 +41,7 @@ and is shown in the command line.
 
 * Divide the the adjacency matrix into squares of equal sizes and assign one section to each single process.
 
-![alt text](https://github.com/dheerajrox/Parallel_Computing_cs17b028/images/main/process_node.png?raw=true)
+![alt text](https://github.com/dheerajrox/Parallel_Computing_cs17b028/blob/main/images/process_node.png?raw=true)
 
 
 * Create a secondary sub matrix of the size of the mini matrices to store part of the result in each process.
