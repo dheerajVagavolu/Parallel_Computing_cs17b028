@@ -95,6 +95,9 @@ mpiexec -np <p> ./shortest_path <s> <d> <g>
 ```
 where p is the number of processes, s is the source, d is the destination and g is the graph size (number of nodes).
 
+* p has to be even power of 2. (1, 4, 16 ... )
+* 0 <= s, d < n
+* graph_size == n 
 
 ## Testing
 
