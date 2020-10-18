@@ -26,6 +26,8 @@ processes on which the program is launched on
 ```
 and is shown in the command line.
 
+Author: V Dheeraj
+Roll No: cs17b028
 
 ## Files
 * Makefile: Use this to compile the c programs.
