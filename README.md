@@ -43,13 +43,13 @@ and is shown in the command line.
 
 * Divide the the adjacency matrix into squares of equal sizes and assign one section to each single process.
 
-![alt text](https://github.com/dheerajrox/Parallel_Computing_cs17b028/blob/main/images/process_node.png?raw=true)
+![Images/process_node.png](https://github.com/dheerajrox/Parallel_Computing_cs17b028/blob/main/images/process_node.png?raw=true)
 
 In this figure, we can see that an adjacency matrix of size 8x8 is divided into sub matrices of 4x4 to accomodate 4 processes.
 
 
 * Create a secondary sub matrix of the size of the mini matrices to store part of the result in each process.
-* take a note of the process containing the required element. ie. AdjacencyMatrix[S,D]
+* Make a note of the process containing the required element. ie. AdjacencyMatrix[S,D]
 * Check if the element is already non-zero. In that case return 1.
 
 ### Message passing
@@ -106,29 +106,26 @@ Using the adjacency matrix:
 ```
 
 
+![Graph](https://github.com/dheerajrox/Parallel_Computing_cs17b028/blob/main/images/graph.png?raw=true)
+
 The results should be: 
 (Copy this adjacency matrix into matrix.txt file before running the following commands)
 
 ```sh
 mpiexec -np 1 ./shortest_path 1 3 4
 ```
-===============================================================
-Shortest path between source: 1 and destination: 3 is 1
-===============================================================
+==> Shortest path between source: 1 and destination: 3 is 1
 
 ```sh
 mpiexec -np 1 ./shortest_path 1 2 4
 ```
-===============================================================
-Shortest path between source: 1 and destination: 2 is 1
-===============================================================
+==> Shortest path between source: 1 and destination: 2 is 1
+
 
 ```sh
 mpiexec -np 1 ./shortest_path 0 3 4
 ```
-===============================================================
-Shortest path between Source: 0 and Destination: 3 is 2
-===============================================================
+==> Shortest path between Source: 0 and Destination: 3 is 2
 
 ## Issues
 
