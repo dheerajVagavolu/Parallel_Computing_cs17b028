@@ -38,7 +38,12 @@ and is shown in the command line.
 * Read the Adjacency Matrix from the file.
 
 ### Process Division
-* Divide the the adjacency matrix into squares of equal sizes and assign one to each single process.
+
+* Divide the the adjacency matrix into squares of equal sizes and assign one section to each single process.
+
+![alt text](https://github.com/dheerajrox/Parallel_Computing_cs17b028/images/main/process_node.png?raw=true)
+
+
 * Create a secondary sub matrix of the size of the mini matrices to store part of the result in each process.
 * take a note of the process containing the required element. ie. AdjacencyMatrix[S,D]
 * Check if the element is already non-zero. In that case return 1.
