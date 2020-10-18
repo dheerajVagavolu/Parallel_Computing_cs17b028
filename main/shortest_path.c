@@ -4,6 +4,7 @@
 #include <math.h>
 #include <string.h>
 #include <unistd.h>
+#include <time.h>
 
 int main(int argc, char **argv)
 {
@@ -117,6 +118,9 @@ int main(int argc, char **argv)
         }
     }
 
+    double time_spent = 0.0;
+    clock_t begin = clock();
+
     if (rank == required_rank)
     {
 
@@ -125,8 +129,14 @@ int main(int argc, char **argv)
         if (check == 1)
         {
             printf("\n===============================================================\n");
-            printf("Shortest path between source: %d and destination: %d is %d\n", s, d, 1);
+            printf("Shortest path between nodes %d and %d is = %d\n", s, d, 1);
             printf("===============================================================\n\n");
+
+            clock_t end = clock();
+            time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
+
+            printf("Time elpased is %f seconds\n\n", time_spent);
+
             MPI_Abort(MPI_COMM_WORLD, 0); //Success return code
             // exit(0);
         }
@@ -256,11 +266,33 @@ int main(int argc, char **argv)
             if (check != 0)
             {
                 printf("\n===============================================================\n");
-                printf("Shortest path between Source: %d and Destination: %d is %d\n", s, d, total + 2);
+                printf("Shortest path between nodes %d and %d is = %d\n", s, d, total + 2);
                 printf("===============================================================\n\n");
+                clock_t end = clock();
+                time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
+
+                printf("Time elpased is %f seconds\n\n", time_spent);
                 MPI_Abort(MPI_COMM_WORLD, 0);
                 // exit(0);
             }
+        }
+    }
+
+    if (rank == required_rank)
+    {
+        int check = *(arr + temp2_s * box_size + temp2_d);
+
+        if (check != 0)
+        {
+            printf("\n===============================================================\n");
+            printf("Shortest path doesnt exist between nodes %d and %d", s, d);
+            printf("===============================================================\n\n");
+            clock_t end = clock();
+            time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
+
+            printf("Time elpased is %f seconds\n\n", time_spent);
+            MPI_Abort(MPI_COMM_WORLD, 0);
+            // exit(0);
         }
     }
 
