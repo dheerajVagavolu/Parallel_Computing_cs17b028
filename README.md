@@ -2,7 +2,8 @@
 ## Table of Contents
 
 
-* [About](#about-the-project)
+* [About](#about)
+* [Files](#files)
 * [Algorithm](#about-the-project)
 * [Built With](#built-with)
 * [Usage](#usage)
@@ -83,4 +84,7 @@ mpiexec -np <p> ./shortest_path <s> <d>
 ```
 where p is the number of processes, s is the source, d is the destination.
 
+## Issues
 
+* Was not sure how to stop all the processes once answer was found by a single process. Used MPI_Abort.
+* In each of my process only a part of the matrix is stored, in accordance with the constraints in the assignment, but when overall space is taken into account, it is more than the actual matrix size.
