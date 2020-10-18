@@ -30,8 +30,19 @@ int main(int argc, char **argv)
 
     int edge = (graph_size / box_size);
 
-    int s = 3;
-    int d = 2;
+    int s;
+    int d;
+
+    if (argv[1] == NULL)
+    {
+        s = 2;
+        d = 3;
+    }
+    else
+    {
+        s = atoi(argv[1]);
+        d = atoi(argv[2]);
+    }
 
     int temp1_s = s / box_size;
     int temp_d = d / box_size;
@@ -41,7 +52,7 @@ int main(int argc, char **argv)
 
     int required_rank = temp1_s * (edge) + temp_d;
 
-    printf("Required Rank: s:%d d:%d box_size:%d temp1s:%d temp2_s:%d required_rank: %d\n\n\n\n\n", s, d, box_size, temp2_s, temp2_d, required_rank);
+    // printf("Required Rank: s:%d d:%d box_size:%d temp1s:%d temp2_s:%d required_rank: %d\n\n\n\n\n", s, d, box_size, temp2_s, temp2_d, required_rank);
 
     int row = (box_size * rank) / graph_size;
 
@@ -66,7 +77,7 @@ int main(int argc, char **argv)
     }
 
     FILE *fp;
-    fp = fopen("test.txt", "r");
+    fp = fopen("matrix.txt", "r");
 
     char *p = malloc(sizeof(char) * (graph_size));
 
@@ -91,26 +102,15 @@ int main(int argc, char **argv)
     {
 
         int check = *(arr + temp2_s * box_size + temp2_d);
-        printf("check: %d\n", check);
+        // printf("check: %d\n", check);
         if (check == 1)
         {
-            printf("Shortest path: %d\n", 1);
-            MPI_Abort(MPI_COMM_WORLD, 404);
+            printf("\n===============================================================\n");
+            printf("Shortest path between source: %d and destination: %d is %d\n", s, d, 1);
+            printf("===============================================================\n\n");
+            MPI_Abort(MPI_COMM_WORLD, 0); //Success return code
+            // exit(0);
         }
-
-        // MPI_Send( const void* buf , int count , MPI_Datatype datatype , int dest , int tag , MPI_Comm comm);
-    }
-
-    for (int i = 0; i < box_size; i++)
-    {
-
-        for (int j = 0; j < box_size; j++)
-        {
-
-            printf("%d ", *(arr + i * box_size + j));
-            // Send the info to some place and store.
-        }
-        printf("\n");
     }
 
     for (int total = 0; total < graph_size; total++)
@@ -230,37 +230,20 @@ int main(int argc, char **argv)
             }
         }
 
-        printf("-----------------------------------\n");
-
         if (rank == required_rank)
         {
             int check = *(arr + temp2_s * box_size + temp2_d);
 
             if (check != 0)
             {
-                printf("Shortest path: %d\n", total + 2);
-                MPI_Abort(MPI_COMM_WORLD, 404);
-            }
-
-            // MPI_Send( const void* buf , int count , MPI_Datatype datatype , int dest , int tag , MPI_Comm comm);
-        }
-
-        if (rank == 0)
-        {
-            for (int i = 0; i < box_size; i++)
-            {
-
-                for (int j = 0; j < box_size; j++)
-                {
-
-                    printf("%d ", *(arr + i * box_size + j));
-                    // Send the info to some place and store.
-                }
-                printf("\n");
+                printf("\n===============================================================\n");
+                printf("Shortest path between Source: %d and Destination: %d is %d\n", s, d, total + 2);
+                printf("===============================================================\n\n");
+                MPI_Abort(MPI_COMM_WORLD, 0);
+                // exit(0);
             }
         }
     }
-    // Message Passing
 
     free(arr);
     free(orig);
