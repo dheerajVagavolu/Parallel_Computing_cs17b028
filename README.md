@@ -7,6 +7,7 @@
 * [Algorithm](#algorithm)
 * [Built With](#built-with)
 * [Usage](#usage)
+* [Testing](#testing)
 * [Issues](#issues)
 
 ## About
@@ -28,8 +29,9 @@ and is shown in the command line.
 
 ## Files
 * Makefile: Use this to compile the c programs.
-* matrix_creator.c: This is the program to generate the random adjacency matrix.
-* shortest_path.c: This is the core algorithm implementing the shortest path algorithm using multiple processes.
+* matrix_creator.c: This is the program to generate the random adjacency matrix. It creates a file 'matrix.txt'.
+* shortest_path.c: This is the core algorithm implementing the shortest path algorithm using multiple processes. It reads the matrix from 'matrix.txt'.
+* While running the shortest_path.c make sure the nodes parameter matches that of the matrix.txt file.
 
 ## Algorithm
 
@@ -91,7 +93,46 @@ mpiexec -np <p> ./shortest_path <s> <d> <g>
 ```
 where p is the number of processes, s is the source, d is the destination and g is the graph size (number of nodes).
 
+
+## Testing
+
+Using the adjacency matrix: 
+
+```sh
+0100
+1011
+0101
+0110
+```
+
+
+The results should be: 
+(Copy this adjacency matrix into matrix.txt file before running the following commands)
+
+```sh
+mpiexec -np 1 ./shortest_path 1 3 4
+```
+===============================================================
+Shortest path between source: 1 and destination: 3 is 1
+===============================================================
+
+```sh
+mpiexec -np 1 ./shortest_path 1 2 4
+```
+===============================================================
+Shortest path between source: 1 and destination: 2 is 1
+===============================================================
+
+```sh
+mpiexec -np 1 ./shortest_path 0 3 4
+```
+===============================================================
+Shortest path between Source: 0 and Destination: 3 is 2
+===============================================================
+
 ## Issues
 
 * Was not sure how to stop all the processes once answer was found by a single process. Used MPI_Abort.
 * In each of my process only a part of the matrix is stored, in accordance with the constraints in the assignment, but when overall space is taken into account, it is more than the actual matrix size.
+
+
