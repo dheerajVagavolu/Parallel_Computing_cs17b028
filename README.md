@@ -1,73 +1,65 @@
 
 ## Table of Contents
 
+
 * [Algorithm](#about-the-project)
 * [Built With](#built-with)
 * [Usage](#usage)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-
 * [Issues](#issues)
 
-
+## Files
+The assignment contains two files:
 
 ## Algorithm
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
+### Inputs: 
+> P: number of processes, S: source, D: destination 
+> Read the Adjacency Matrix from the file.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
+### Process Division
+> Divide the the adjacency matrix into squares of equal sizes and assign one to each single process.
+> Create a secondary sub matrix of the size of the mini matrices to store part of the result in each process.
+> take a note of the process containing the required element. ie. AdjacencyMatrix[S,D]
+> Check if the element is already non-zero. In that case return 1.
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue.
-
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
+### Message passing
+> Pass the each processes data to each block of it's column and it's row.
+> Similarily recieve data from each block of it's column and it's row.
+> Calculate the submatrix from this data and store in the same process.
+> The A x A is now present in parts in all the processes.
+> Check if the process containing AdjacencyMatrix[S,D] != 0.
+> Repeat until either iteration count exceeds number of nodes or AdjacencyMatrix[S,D] != 0. 
+> Whenever AdjacencyMatrix[S,D] != 0 return the iteration count, ie. the shortest path.
+> If iteration count > node count, and AdjacencyMatrix[S,D] is still equal to 0. Then no path exists between the given source and destination.
 
 ### Built With
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Bootstrap]
-* [JQuery]
-* [Laravel]
 
+* [MPICH2]
+* [C]
 
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-
-
-<!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
+To remove the previous object files use:
 ```sh
-npm install npm@latest -g
+make clean
 ```
 
-### Installation
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+To compile both the object files use:
 ```sh
-git clone https://github.com/your_username_/Project-Name.git
-```
-3. Install NPM packages
-```sh
-npm install
-```
-4. Enter your API in `config.js`
-```JS
-const API_KEY = 'ENTER YOUR API';
+make
 ```
 
+To generate a random matrix use:
+```sh
+./matrix_creator n 
+```
+where n is the number of nodes.
+
+
+To run the shortest path algorithm use:
+```sh
+mpiexec -np <np> ./shortest_path <s> <d>
+```
+where <np> is the number of processes, <s> is the source, <d> is the destination.
 
 
