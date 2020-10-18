@@ -7,8 +7,27 @@
 * [Usage](#usage)
 * [Issues](#issues)
 
+## About
+
+* Task: Implement shortest path algorithm using matrix multiplication. Assume an undirected
+graph with edge weights 1.
+
+* Constraint: The adjacency matrix cannot be allocated on a single process, but will occupy all the
+processes on which the program is launched on
+
+* The number of processes is a perfect square.
+
+* Result: Implemented a C program to solve the given problem, (including the constraint). The output is in the format 
+```c
+ printf("Shortest path between source: %d and destination: %d is %d\n", source, destination, shortest_path);
+```
+and is shown in the command line.
+
+
 ## Files
-The assignment contains two files:
+* Makefile: Use this to compile the c programs.
+* matrix_creator.c: This is the program to generate the random adjacency matrix.
+* shortest_path.c: This is the core algorithm implementing the shortest path algorithm using multiple processes.
 
 ## Algorithm
 
@@ -26,7 +45,8 @@ The assignment contains two files:
 * Pass the each processes data to each block of it's column and it's row.
 * Similarily recieve data from each block of it's column and it's row.
 * Calculate the submatrix from this data and store in the same process.
-* The A x A is now present in parts in all the processes.
+* This is done parallely for all processes.
+* The A x A is now present in pieces in all the processes.
 * Check if the process containing AdjacencyMatrix[S,D] != 0.
 * Repeat until either iteration count exceeds number of nodes or AdjacencyMatrix[S,D] != 0. 
 * Whenever AdjacencyMatrix[S,D] != 0 return the iteration count, ie. the shortest path.
@@ -58,7 +78,7 @@ where n is the number of nodes.
 
 To run the shortest path algorithm use:
 ```sh
-mpiexec -np <p* ./shortest_path <s* <d*
+mpiexec -np <p> ./shortest_path <s> <d>
 ```
 where p is the number of processes, s is the source, d is the destination.
 
