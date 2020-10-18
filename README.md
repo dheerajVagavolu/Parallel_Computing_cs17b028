@@ -49,7 +49,7 @@ In this figure, we can see that an adjacency matrix of size 8x8 is divided into 
 
 
 * Create a secondary sub matrix of the size of the mini matrices to store part of the result in each process.
-* take a note of the process containing the required element. ie. AdjacencyMatrix[S,D]
+* Make a note of the process containing the required element. ie. AdjacencyMatrix[S,D]
 * Check if the element is already non-zero. In that case return 1.
 
 ### Message passing
