@@ -22,7 +22,16 @@ int main(int argc, char **argv)
 
     MPI_Status status;
 
-    int graph_size = 4;
+    int graph_size = argv[3];
+
+    if (argv[1] == NULL)
+    {
+        graph_size = 4;
+    }
+    else
+    {
+        graph_size = argv[3];
+    }
 
     int root_n = sqrt(n);
 
