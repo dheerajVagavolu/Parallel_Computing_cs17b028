@@ -4,7 +4,7 @@
 
 * [About](#about)
 * [Files](#files)
-* [Algorithm](#about-the-project)
+* [Algorithm](#algorithm)
 * [Built With](#built-with)
 * [Usage](#usage)
 * [Issues](#issues)
