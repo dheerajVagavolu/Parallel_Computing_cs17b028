@@ -122,13 +122,13 @@ mpiexec -np 1 ./shortest_path 1 3 4
 ==> Shortest path between source: 1 and destination: 3 is 1
 
 ```sh
-mpiexec -np 1 ./shortest_path 1 2 4
+mpiexec -np 4 ./shortest_path 1 2 4
 ```
 ==> Shortest path between source: 1 and destination: 2 is 1
 
 
 ```sh
-mpiexec -np 1 ./shortest_path 0 3 4
+mpiexec -np 4 ./shortest_path 0 3 4
 ```
 ==> Shortest path between Source: 0 and Destination: 3 is 2
 
