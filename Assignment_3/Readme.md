@@ -32,24 +32,24 @@ make
 ## Instructions
 Instruction format for Questions 1 to 11:
 
-1: mpiexec -np 'np' ./1 //<size//>
+1: mpiexec -np 'np' ./1 [size]
 
-2: mpiexec -np /<np/> ./2 /<size/>
+2: mpiexec -np [np] ./2 [size]
 
-3: mpiexec -np /<np/> ./3 /<size/>
+3: mpiexec -np [np] ./3 [size]
 
 4: 
 
-5: ./5 /<nt/> /<size/>
+5: ./5 [nt] [size]
 
-6: ./6 /<threads/> /<size/>
+6: ./6 [threads] [size]
 
-7:  mpiexec -np /<np/> ./7 /<threads/> /<size/>
+7:  mpiexec -np [np] ./7 [threads] [size]
 
-8: mpiexec -np /<np/> ./8 /<threads/> /<size/>
+8: mpiexec -np [np] ./8 [threads] [size]
 
-9: ./9 /<threads/> /<m/> /<n/> /<p/>
+9: ./9 [threads] [m] [n] [p]
 
-10: mpiexec -np /<np/> ./10 /<ar_size/> /<iterations/>
+10: mpiexec -np [np] ./10 [ar_size] [iterations]
 
-10: mpiexec -np /<np/> ./11 /<threads/>
+10: mpiexec -np [np] ./11 [threads]
