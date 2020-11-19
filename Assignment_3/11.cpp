@@ -8,7 +8,7 @@
 
 using namespace std;
 
-int i=0;
+int msg=0;
 int num=0;
 
 mutex mtx; 
@@ -17,13 +17,15 @@ void iittp_barrier(int rank,int n, int tid, int threads)
 {
     if(rank==0 && tid==0)
     {
-        MPI_Send(&i,1,MPI_INT,1,1,MPI_COMM_WORLD);
-        MPI_Recv(&i,1,MPI_INT,n-1,1,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+        MPI_Send(&msg,1,MPI_INT,(rank+1)%n,1,MPI_COMM_WORLD);
+        MPI_Recv(&msg,1,MPI_INT,n-1,1,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+        MPI_Send(&msg,1,MPI_INT,(rank+1)%n,1,MPI_COMM_WORLD);
     }
     else if(tid==0)
     {
-        MPI_Recv(&i,1,MPI_INT,rank-1,1,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
-        MPI_Send(&i,1,MPI_INT,(rank+1)%n,1,MPI_COMM_WORLD);
+        MPI_Recv(&msg,1,MPI_INT,rank-1,1,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+        MPI_Send(&msg,1,MPI_INT,(rank+1)%n,1,MPI_COMM_WORLD);
+        MPI_Recv(&msg,1,MPI_INT,rank-1,1,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
     }
 
     mtx.lock();
